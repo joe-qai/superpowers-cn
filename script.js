@@ -11,6 +11,39 @@ document.querySelectorAll('.install-tab').forEach(tab => {
     });
 });
 
+// Mobile Navigation
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+const mobileNav = document.getElementById('mobileNav');
+const mobileOverlay = document.getElementById('mobileOverlay');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+function openMobileMenu() {
+    mobileNav.classList.add('active');
+    mobileOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeMobileMenu() {
+    mobileNav.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+mobileMenuBtn.addEventListener('click', openMobileMenu);
+mobileCloseBtn.addEventListener('click', closeMobileMenu);
+mobileOverlay.addEventListener('click', closeMobileMenu);
+
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+        closeMobileMenu();
+    }
+});
+
 // Copy to clipboard functionality
 document.querySelectorAll('.copy-btn').forEach(button => {
     button.addEventListener('click', () => {
